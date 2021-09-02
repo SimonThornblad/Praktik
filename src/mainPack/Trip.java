@@ -27,72 +27,59 @@ public class Trip {
 
         Condition newCondition = new Condition(theTrain);
 
-        // Sets the colour
 
-        menus("colour");
-        Colour newColour = new Colour(Integer.parseInt(_scanner.nextLine().trim()));
-        System.out.println(newColour.toString());
-        newCondition.setColour(newColour);
-
-        // Sets the event for the selected colour
-        menus("event");
-        int actionChoice = Integer.parseInt(_scanner.nextLine());
-        Event newEvent = new Event(actions[actionChoice]);
-        newCondition.setAction(newEvent);
-
-
-        menus("condition");
-
-
-        newCondition.setOption(Integer.parseInt(_scanner.nextLine()));
-
-        switch (newCondition.getOption()) {
-            case 1 -> {
-                // Sets the occurrence rate for the event
-                System.out.println("How often should it occur?");
-                // 1 = each time    2 = every second time ...
-                newCondition.setCount(Integer.parseInt(_scanner.nextLine()));
-               // int occuChoice = Integer.parseInt(_scanner.nextLine());
-               // newCondition.setOccurrence(occuChoice);
+        while (true) {
+            menus("newCon");
+            if(Integer.parseInt(_scanner.nextLine()) == 2) {
+                break;
             }
-            case 2 -> {
-                System.out.println("How many in a row?");
-                newCondition.setCount(Integer.parseInt(_scanner.nextLine()));
-               // int seqChoice = Integer.parseInt(_scanner.nextLine());
-                //newCondition.setSequential(seqChoice);
+
+            // Sets the colour
+            menus("colour");
+            Colour newColour = new Colour(Integer.parseInt(_scanner.nextLine().trim()));
+            newCondition.setColour(newColour);
+
+            // Sets the event
+            menus("event");
+            int actionChoice = Integer.parseInt(_scanner.nextLine());
+            Event newEvent = new Event(actions[actionChoice - 1]);
+            newCondition.setAction(newEvent);
+
+            // Sets the condition
+            menus("condition");
+            newCondition.setOption(Integer.parseInt(_scanner.nextLine()));
+
+            switch (newCondition.getOption()) {
+                case 1 -> {
+                    // Sets the occurrence rate for the event
+                    System.out.println("How often should it occur?");
+                    // 1 = each time    2 = every second time ...
+                    newCondition.setCount(Integer.parseInt(_scanner.nextLine()));
+                }
+                case 2 -> {
+                    System.out.println("How many in a row?");
+                    newCondition.setCount(Integer.parseInt(_scanner.nextLine()));
+                }
+                case 3 -> {
+                    // What here??
+                    newCondition.setCount(0);
+                }
             }
-            case 3 -> {
-                // What here??
-                newCondition.setCount(0);
-            }
+            // Adds the condition to the list and loops back to the start
+            conditionList.add(newCondition);
         }
-
-        // Creates the condition
-        conditionList.add(newCondition);
-
         // Initializes the trip
+        System.out.println(conditionList.size());
         trip(theTrain);
-
-
     }
 
     public void trip(Train theTrain) throws Exception{
         //==========  INPUT  ===================================================================================================
         Scanner _scanner = new Scanner(System.in);
 
-        //Train theTrain = new Train();
-
         // This illustrates the actual input from the colour sensor
         while(true) {
-            System.out.println("\nWhich color do you pass?\n" +
-                    "=============\n" +
-                    " 1. Green\n" +
-                    " 2. Red\n" +
-                    " 3. Yellow\n" +
-                    " 4. Blue\n" +
-                    " 5. Exit\n" +
-                    "\n==>");
-
+            menus("colourInput");  // Prints the menu
             int input = Integer.parseInt(_scanner.nextLine());
 
             if(input == 5) {
@@ -100,10 +87,9 @@ public class Trip {
             } else {
                 theTrain.colourList.add(theTrain.colourCreator(input));
                 actions(theTrain, conditionList);
+                stringBuilder(theTrain);
             }
-
         }
-
 
         // Prints the colour list + colour counters
         printStuff(theTrain);
@@ -117,11 +103,12 @@ public class Trip {
             if(theTrain.colourList.get(theTrain.colourList.size()-1).toString().equals(con.colour.toString())) {
                 // Checks if the condition is met
                 if(con.conditionChecker()) {
-                    // Action when the condition is met
                     System.out.println("The train " + con.action.toString() + ".");
+                } else {
+                    System.out.println("Condition exists but has not been met.");
                 }
             } else {
-                System.out.println("No condition as been met");
+                System.out.println("No condition exists for this colour.");
             }
         }
     }
@@ -130,6 +117,13 @@ public class Trip {
 //========== Printing methods for controlling ==========================================================================
     public void menus(String menuChoice) {
         switch (menuChoice) {
+            case "newCon" -> {
+                    System.out.println("Do you wish to add any condition?" +
+                            "=============\n" +
+                            " 1. Yes\n" +
+                            " 2. No, initialize the trip\n" +
+                            "\n==>");
+            }
             case "colour" -> {
                 System.out.println("Select a colour: ");
                 for (String colour : colours) {
@@ -150,12 +144,24 @@ public class Trip {
                         " 3. No\n" +
                         "\n==>");
             }
+            case "colourInput" -> {
+
+                System.out.println("\nWhich color do you pass?\n" +
+                        "=============\n" +
+                        " [1. Green] " +
+                        " [2. Red] " +
+                        " [3. Yellow] " +
+                        " [4. Blue] " +
+                        " [5. Exit] " +
+                        "\n==>");
+            }
         }
     }
 
     public void printStuff (Train theTrain) {
         stringBuilder(theTrain);
         printValues(theTrain);
+        printConditions(conditionList);
     }
 
     public void stringBuilder (Train theTrain) {
@@ -176,6 +182,12 @@ public class Trip {
                 "\nRed: " + theTrain.redCount +
                 "\nBlue: " + theTrain.blueCount +
                 "\nYellow: " + theTrain.yellowCount);
+    }
+
+    public void printConditions(ArrayList<Condition> conList) {
+        for(Condition condition : conList) {
+            System.out.println(condition.toString());
+        }
     }
 
 }

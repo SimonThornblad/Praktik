@@ -10,18 +10,17 @@ public class Condition {
     public int count;
 
     public Condition(){
-
-    }
-    public Condition(Colour colour, Event action, Train theTrain) {
-        this.colour = colour;
-        this.action = action;
-        this.theTrain = theTrain;
     }
 
-    public Condition(Colour colour, Event action, int occurrence, Train theTrain) {
-        this.colour = colour;
-        this.action = action;
-        this.theTrain = theTrain;
+    @Override
+    public String toString() {
+        return "Condition{" +
+                "colour=" + colour +
+                ", action=" + action +
+                ", theTrain=" + theTrain +
+                ", option=" + option +
+                ", count=" + count +
+                '}';
     }
 
     public Condition(Train train) {
@@ -30,7 +29,6 @@ public class Condition {
 
     public boolean conditionChecker() {
         if (this.option == 1) {
-
             return occurrenceChecker();
         }
         else if (option == 2) {
@@ -58,7 +56,6 @@ public class Condition {
                 return false;
             }
         }
-
         return true;
     }
 
