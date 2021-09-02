@@ -2,7 +2,10 @@ package mainPack;
 
 public class Init{
     public static void main(String[] args) throws Exception{
-        new Trip().init();
+    //    new Trip().init();
         //Test
+
+        MockTrip myTrip = new MockTrip();
+        myTrip.newMockTrip();
     }
 }
