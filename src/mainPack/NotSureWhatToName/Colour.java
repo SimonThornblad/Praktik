@@ -1,5 +1,7 @@
 package mainPack.NotSureWhatToName;
 
+import java.util.Objects;
+
 public class Colour {
     public String name;
 
@@ -7,21 +9,17 @@ public class Colour {
         this.name = name;
     }
 
-    public Colour (int i) {
-        switch (i) {
-            case 1 -> {
-                this.name = "Green";
-            }
-            case 2 -> {
-                this.name = "Red";
-            }
-            case 3 -> {
-                this.name = "Yellow";
-            }
-            case 4 -> {
-                this.name = "Blue";
-            }
-        }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Colour colour = (Colour) o;
+        return Objects.equals(name, colour.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 
     @Override

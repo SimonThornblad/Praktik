@@ -54,6 +54,14 @@ public class Train {
         }
         return 100;
     }
+
+    public Colour lastColour () {
+        return colourList.get(colourList.size()-1);
+    }
+
+    public Colour getColour (int i) {
+        return colourList.get(colourList.size()-i);
+    }
 }
 
 

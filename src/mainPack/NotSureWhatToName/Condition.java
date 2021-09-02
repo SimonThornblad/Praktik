@@ -3,8 +3,6 @@ package mainPack.NotSureWhatToName;
 public class Condition {
     public Colour colour;
     public Event action;
-    //public int occurrence = 1;
-    //public int sequential = 1;
     public Train theTrain;
     public int option;
     public int count;
@@ -17,7 +15,6 @@ public class Condition {
         return "Condition{" +
                 "colour=" + colour +
                 ", action=" + action +
-                ", theTrain=" + theTrain +
                 ", option=" + option +
                 ", count=" + count +
                 '}';
@@ -51,8 +48,7 @@ public class Condition {
         int arraySize = theTrain.colourList.size();
 
         for (int i = count; i > 0; i-- ){
-            if (i > arraySize ||
-                    !theTrain.colourList.get(arraySize-1).toString().equals(theTrain.colourList.get(arraySize-i).toString())){
+            if (i > arraySize || !theTrain.lastColour().equals(theTrain.getColour(i))) {
                 return false;
             }
         }
