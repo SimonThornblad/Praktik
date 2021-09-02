@@ -3,10 +3,11 @@ package mainPack.NotSureWhatToName;
 public class Condition {
     public Colour colour;
     public Event action;
-    public int occurrence = 1;
-    public int sequential = 1;
+    //public int occurrence = 1;
+    //public int sequential = 1;
     public Train theTrain;
-
+    public int option;
+    public int count;
 
     public Condition(){
 
@@ -20,27 +21,22 @@ public class Condition {
     public Condition(Colour colour, Event action, int occurrence, Train theTrain) {
         this.colour = colour;
         this.action = action;
-
-        // If occurrence haven't been decided, set it to 1
-        if (occurrence == 0) {
-            occurrence = 1;
-        } else {
-            this.occurrence = occurrence;
-        }
         this.theTrain = theTrain;
     }
 
+    public Condition(Train train) {
+        this.theTrain = train;
+    }
+
     public boolean conditionChecker() {
-        if (occurrence >= 1) {
-            if(occurrenceChecker()) {
-                return true;
-            }
- //           return occurrenceChecker();
+        if (this.option == 1) {
+
+            return occurrenceChecker();
         }
-        if (sequential>1) {
+        else if (option == 2) {
             return sequentialChecker();
         }
-        return false;
+        return option == 3;
     }
 
     public boolean occurrenceChecker() {
@@ -48,12 +44,20 @@ public class Condition {
         int colourCounter = theTrain.whichCounter(colour);
 
         // Is the remainder 0?
-        return colourCounter % occurrence == 0;
+        return colourCounter % count == 0;
     }
 
 
     public boolean sequentialChecker() {
 
+        int arraySize = theTrain.colourList.size();
+
+        for (int i = count; i > 0; i-- ){
+            if (i > arraySize ||
+                    !theTrain.colourList.get(arraySize-1).toString().equals(theTrain.colourList.get(arraySize-i).toString())){
+                return false;
+            }
+        }
 
         return true;
     }
@@ -75,22 +79,6 @@ public class Condition {
         this.action = action;
     }
 
-    public int getOccurrence() {
-        return occurrence;
-    }
-
-    public void setOccurrence(int occurrence) {
-        this.occurrence = occurrence;
-    }
-
-    public int getSequential() {
-        return sequential;
-    }
-
-    public void setSequential(int sequential) {
-        this.sequential = sequential;
-    }
-
     public Train getTheTrain() {
         return theTrain;
     }
@@ -99,7 +87,21 @@ public class Condition {
         this.theTrain = theTrain;
     }
 
+    public int getOption() {
+        return option;
+    }
 
+    public void setOption(int option) {
+        this.option = option;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
 }
 
 

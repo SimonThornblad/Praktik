@@ -23,7 +23,9 @@ public class Trip {
         Scanner _scanner = new Scanner(System.in);
 //=====================================================================================================================
 
-        Condition newCondition = new Condition();
+        Train theTrain = new Train();
+
+        Condition newCondition = new Condition(theTrain);
 
         // Sets the colour
 
@@ -41,21 +43,27 @@ public class Trip {
 
         menus("condition");
 
-        switch (Integer.parseInt(_scanner.nextLine())) {
+
+        newCondition.setOption(Integer.parseInt(_scanner.nextLine()));
+
+        switch (newCondition.getOption()) {
             case 1 -> {
                 // Sets the occurrence rate for the event
                 System.out.println("How often should it occur?");
                 // 1 = each time    2 = every second time ...
-                int occuChoice = Integer.parseInt(_scanner.nextLine());
-                newCondition.setOccurrence(occuChoice);
+                newCondition.setCount(Integer.parseInt(_scanner.nextLine()));
+               // int occuChoice = Integer.parseInt(_scanner.nextLine());
+               // newCondition.setOccurrence(occuChoice);
             }
             case 2 -> {
                 System.out.println("How many in a row?");
-                int seqChoice = Integer.parseInt(_scanner.nextLine());
-                newCondition.setSequential(seqChoice);
+                newCondition.setCount(Integer.parseInt(_scanner.nextLine()));
+               // int seqChoice = Integer.parseInt(_scanner.nextLine());
+                //newCondition.setSequential(seqChoice);
             }
             case 3 -> {
                 // What here??
+                newCondition.setCount(0);
             }
         }
 
@@ -63,16 +71,16 @@ public class Trip {
         conditionList.add(newCondition);
 
         // Initializes the trip
-        trip();
+        trip(theTrain);
 
 
     }
 
-    public void trip() throws Exception{
+    public void trip(Train theTrain) throws Exception{
         //==========  INPUT  ===================================================================================================
         Scanner _scanner = new Scanner(System.in);
 
-        Train theTrain = new Train();
+        //Train theTrain = new Train();
 
         // This illustrates the actual input from the colour sensor
         while(true) {
