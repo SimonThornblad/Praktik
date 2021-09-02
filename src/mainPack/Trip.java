@@ -25,10 +25,11 @@ public class Trip {
 
         Train theTrain = new Train();
 
-        Condition newCondition = new Condition(theTrain);
+
 
 
         while (true) {
+            Condition newCondition = new Condition(theTrain);
             menus("newCon");
             if(Integer.parseInt(_scanner.nextLine()) == 2) {
                 break;
@@ -70,6 +71,7 @@ public class Trip {
         }
         // Initializes the trip
         System.out.println(conditionList.size());
+
         trip(theTrain);
     }
 
