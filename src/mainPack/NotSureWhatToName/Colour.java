@@ -3,6 +3,7 @@ package mainPack.NotSureWhatToName;
 import java.util.Objects;
 
 public class Colour {
+    /*
     public String name;
 
     public Colour(String name) {
@@ -26,4 +27,6 @@ public class Colour {
     public String toString() {
         return name;
     }
+
+     */
 }
