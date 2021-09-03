@@ -5,7 +5,10 @@ public class Init{
     //    new Trip().init();
         //Test
 
-        MockTrip myTrip = new MockTrip();
-        myTrip.newMockTrip();
+   //     MockTrip myTrip = new MockTrip();
+   //     myTrip.newMockTrip();
+
+        ReadFile readFile = new ReadFile();
+        readFile.createArray();
     }
 }
