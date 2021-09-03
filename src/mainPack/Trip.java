@@ -130,13 +130,13 @@ public class Trip {
             case "colour" -> {
                 System.out.println("Select a colour: ");
                 for (IColour colour : colours) {
-                    System.out.println(colour.toString());
+                    System.out.println(colour.returnId() + ". " + colour.toString());
                 }
             }
             case "event" -> {
                 System.out.println("What should happen when the train passes the colour?");
                 for (IFunctions action : functions) {
-                    System.out.println("The train " + action.toString() + ".");
+                    System.out.println(action.getFunctionId() + ". The train " + action.toString() + ".");
                 }
             }
             case "condition" ->
