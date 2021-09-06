@@ -18,12 +18,16 @@ public class Condition {
 
     @Override
     public String toString() {
-        return "Condition{" +
-                "colour=" + colour +
-                ", action=" + action +
-                ", option=" + option +
-                ", count=" + count +
-                '}';
+        String opt = "Occurrence";
+        if(option == 2) {
+            opt = "Sequential";
+        }
+        return "Condition [" +
+                "Colour: " + colour +
+                ", Action: " + action +
+                ", Option: " + opt +
+                ", Every: " + count +
+                            ']';
     }
 
     public Condition(Train train) {

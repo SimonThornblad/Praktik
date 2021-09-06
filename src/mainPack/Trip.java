@@ -24,9 +24,9 @@ public class Trip {
     Scanner _scanner = new Scanner(System.in);
 
     // Creating array for simulation
-    loadMockTrip fileRead = new loadMockTrip();
+    LoadMockTrip fileRead = new LoadMockTrip();
     IColour[] trackArray = new IColour[30];
-    ReadConditions conRead = new ReadConditions();
+    LoadConditions conRead = new LoadConditions();
     Train theTrain = new Train();
 
     public Trip() throws Exception {
@@ -134,7 +134,7 @@ public class Trip {
                 if(con.conditionChecker()) {
                     System.out.println("[ACTION] The train " + con.action.executeFunction() + ".");
                 } else {
-                    System.out.println("Condition exists but has not been met.");
+      //              System.out.println("Condition exists but has not been met.");
                 }
             } else {
    //             System.out.println("No condition exists for this colour.");
@@ -221,9 +221,9 @@ public class Trip {
 
 
     public void printConditions(ArrayList<Condition> conList) {
-        for(Condition con : conList) {
-            System.out.println(con.toString());
+
+        for(int i = 0; i < conList.size(); i++) {
+            System.out.println((i+1) +". " + conList.get(i).toString());
         }
     }
-
 }

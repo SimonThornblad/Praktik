@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.List;
 
-public class loadMockTrip {
+public class LoadMockTrip {
 
     IColour[] trackArray = new IColour[30];
 

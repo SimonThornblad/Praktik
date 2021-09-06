@@ -11,7 +11,7 @@ public class FlashLights implements IFunctions{
 
     @Override
     public String executeFunction() {
-        return "s lights flashes";
+        return "flashes the lights";
     }
 
     public String toString() {

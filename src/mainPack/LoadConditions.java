@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReadConditions {
+public class LoadConditions {
     List<IFunctions> functions;
     List<IColour> colours;
 
@@ -52,11 +52,9 @@ public class ReadConditions {
 
         String[] parts = str.split(";"); // Splits the String into a String[]
 
+
         Condition newCon = new Condition(myTrain);
 
-        for (String part : parts) {
-            System.out.println(part);
-        }
         int colour = whichColour(parts[1]); // Returns the ID for the colour
         int function = whichFunction(parts[2]); // Returns the ID for the function
 
@@ -101,6 +99,9 @@ public class ReadConditions {
             }
             case "stops for 3 seconds then continues" -> {
                 return 2;
+            }
+            case "lights flashes" ->  {
+                return 3;
             }
             default -> {
                 System.out.println("Invalid function input");
