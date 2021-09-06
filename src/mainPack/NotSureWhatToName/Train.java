@@ -14,6 +14,17 @@ public class Train {
     public Train() {
     }
 
+
+
+    public void addCount (Colour colour) {
+        switch(colour.toString()) {
+            case "Green" -> greenCount++;
+            case "Red" -> redCount++;
+            case "Blue" -> blueCount++;
+            case "Yellow" -> yellowCount++;
+        }
+    }
+
     public Colour colourCreator(int i) {
         switch (i) {
             case 1 -> {

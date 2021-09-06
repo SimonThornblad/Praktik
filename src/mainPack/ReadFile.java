@@ -14,7 +14,7 @@ public class ReadFile {
     ArrayList<Colour> colourArrayList = startUp.createColours();
 
 
-    public void createArray() throws Exception {
+    public Colour[] createArray() throws Exception {
         int i = 0;
         File myFile = new File("mockTripData.csv");
         myFile.createNewFile();
@@ -35,7 +35,9 @@ public class ReadFile {
                 i++;
             }
         }
-        printArray();
+    //    printArray();
+
+        return trackArray;
     }
 
     public void printArray() {
