@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 
 public class MockTrip {
+    /*
 
     Scanner _scanner = new Scanner(System.in);
     StartUp startUp = new StartUp();
@@ -40,4 +41,6 @@ public class MockTrip {
         for(int i = 0; i < trackArray.length; i++)
         System.out.println(i+1 + " [" + trackArray[i] + "]");
     }
+
+     */
 }

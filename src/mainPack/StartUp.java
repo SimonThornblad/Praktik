@@ -2,10 +2,15 @@ package mainPack;
 
 import mainPack.NotSureWhatToName.Colour;
 import mainPack.NotSureWhatToName.Event;
+import mainPack.colours.ColourFactory;
 
 import java.util.ArrayList;
 
+
+/*
 public class StartUp {
+
+
 
     public ArrayList<Colour> createColours() {
         ArrayList<Colour> colourList = new ArrayList<>();
@@ -37,4 +42,8 @@ public class StartUp {
         return actionList;
     }
 
+
+
 }
+
+ */

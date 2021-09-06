@@ -4,27 +4,52 @@ import mainPack.NotSureWhatToName.Colour;
 import mainPack.NotSureWhatToName.Condition;
 import mainPack.NotSureWhatToName.Event;
 import mainPack.NotSureWhatToName.Train;
+import mainPack.colours.ColourFactory;
+import mainPack.colours.IColour;
+import mainPack.functions.FunctionFactory;
+import mainPack.functions.IFunctions;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class Trip {
-    StartUp startUp = new StartUp();
-    ArrayList<Colour> colourArrayList = startUp.createColours();
-    ArrayList<Event> eventArrayList = startUp.createEvent();
+    //StartUp startUp = new StartUp();
+    //ArrayList<Colour> colourArrayList = startUp.createColours();
+    //ArrayList<Event> eventArrayList = startUp.createEvent();
+    List<IFunctions> functions;
+    List<IColour> colours;
+    ColourFactory colFactory = new ColourFactory(new ArrayList<>());
+    FunctionFactory funFactory = new FunctionFactory(new ArrayList<>());
+
     ArrayList<Condition> conditionList = new ArrayList<>();
     Scanner _scanner = new Scanner(System.in);
 
-    public void init(){
+    // Creating array for simulation
+    ReadFile fileRead = new ReadFile();
+    IColour[] trackArray = new IColour[30];
+
+
+
+    public Trip() throws Exception {
+    }
+
+
+    public void init() throws Exception {
+        functions = funFactory.availableFunctions();
+        colours = colFactory.availableColors();
+        trackArray = fileRead.createArray(colours);
+
         conMenu();
     }
 
-    private void conMenu() {
+    private void conMenu() throws InterruptedException {
         Train theTrain = new Train();
 
         while (true) {
             Condition newCondition = new Condition(theTrain);
-            // Add a condition?
+            // Add a condition Y/N?
             menus("newCon");
             if(inScan() == 2) {
                 break;
@@ -32,11 +57,11 @@ public class Trip {
 
             // Sets the colour
             menus("colour");
-            newCondition.setColour(colourArrayList.get(inScan()-1));
+            newCondition.setColour(colFactory.getColour(inScan()));
 
             // Sets the event
             menus("event");
-            newCondition.setAction(eventArrayList.get(inScan()-1));
+            newCondition.setAction(new Event(funFactory.getFunction(inScan())));
 
             // Sets the condition
             menus("condition");
@@ -60,7 +85,7 @@ public class Trip {
             conditionList.add(newCondition);
         }
         // Initializes the trip
-        trip(theTrain);
+        autoTrip(theTrain);
     }
 
 //==========  INPUT  ===============================================================================================
@@ -69,13 +94,12 @@ public class Trip {
         // This illustrates the actual input from the colour sensor
         while(true) {
             menus("colourInput");  // Prints the menu
+            int input = Integer.parseInt(_scanner.nextLine());
 
-            int input = inScan();
-
-            if(input == 5) {
+            if(input == colours.size()+1) {
                 break;
             } else {
-                theTrain.colourList.add(theTrain.colourCreator(input));
+                theTrain.colourList.add(colFactory.getColour(input));
                 actions(theTrain, conditionList);
                 stringBuilder(theTrain);
             }
@@ -84,6 +108,33 @@ public class Trip {
         // Prints the colour list + colour counters
         printStuff(theTrain);
     }
+
+    public void autoTrip(Train theTrain) throws InterruptedException {
+
+        for(int i = 0; i < trackArray.length; i++) {
+
+            if(trackArray[i] != null) {
+                theTrain.colourList.add(trackArray[i]);
+
+                System.out.print("\nIndex [" + (i+1) + "]: " + trackArray[i] + "  ");
+                actions(theTrain, conditionList);
+                stringBuilder(theTrain);
+                System.out.println();
+
+
+
+            } else {
+                System.out.println("Index [" + (i+1)+ "]");
+
+            }
+
+            TimeUnit.MILLISECONDS.sleep(200L);
+        }
+        printStuff(theTrain);
+
+    }
+
+
 //======================================================================================================================
 
 
@@ -116,14 +167,14 @@ public class Trip {
 
             case "colour" -> {
                 System.out.println("Select a colour: ");
-                for(int i = 0; i < colourArrayList.size(); i++) {
-                    System.out.println((i+1) + ". " + colourArrayList.get(i).toString());
+                for (IColour colour : colours) {
+                    System.out.println(colour.returnId() + ". " + colour.toString());
                 }
             }
             case "event" -> {
                 System.out.println("What should happen when the train passes the colour?");
-                for(int i = 0; i < eventArrayList.size(); i++) {
-                    System.out.println((i+1) + ". " + eventArrayList.get(i).toString());
+                for (IFunctions action : functions) {
+                    System.out.println(action.getFunctionId() + ". The train " + action.toString() + ".");
                 }
             }
             case "condition" ->
@@ -134,16 +185,15 @@ public class Trip {
                         " 3. No\n" +
                         "\n==>");
 
-            case "colourInput" ->
+            case "colourInput" -> {
                 System.out.println("\nWhich color do you pass?\n" +
-                        "=============\n" +
-                        " [1. Green] " +
-                        " [2. Red] " +
-                        " [3. Yellow] " +
-                        " [4. Blue] " +
-                        " [5. Exit] " +
-                        "\n==>");
-
+                        "=============\n");
+                for (IColour colour: colours){
+                    System.out.println("[" + colour.returnId() + ". " +
+                            colour.toString() + "] ");
+                }
+                System.out.println("[" + (colours.size()+1) + ". Exit]");
+            }
         }
     }
 
@@ -171,11 +221,16 @@ public class Trip {
     }
 
     public void printValues(Train theTrain) {
+        /*
         System.out.println("Green: " + theTrain.greenCount +
                 "\nRed: " + theTrain.redCount +
                 "\nBlue: " + theTrain.blueCount +
                 "\nYellow: " + theTrain.yellowCount);
+
+         */
     }
+
+
 
     public void printConditions(ArrayList<Condition> conList) {
         for(Condition condition : conList) {

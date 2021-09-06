@@ -1,14 +1,16 @@
 package mainPack.NotSureWhatToName;
 
-public class Event {
-    public String whatHappens;
+import mainPack.functions.IFunctions;
 
-    public Event(String action) {
+public class Event {
+    public IFunctions whatHappens;
+
+    public Event(IFunctions action) {
         this.whatHappens = action;
     }
 
     @Override
     public String toString() {
-        return whatHappens;
+        return whatHappens.toString();
     }
 }
