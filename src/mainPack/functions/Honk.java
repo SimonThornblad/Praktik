@@ -10,10 +10,7 @@ public class Honk implements IFunctions{
 
     @Override
     public String executeFunction() {
-
-
-
-        return "tut tut";
+        return "says tut tut";
     }
 
     public String toString() {

@@ -1,6 +1,6 @@
 package mainPack;
 
-import mainPack.NotSureWhatToName.Colour;
+
 import mainPack.NotSureWhatToName.Condition;
 
 import mainPack.NotSureWhatToName.Train;
@@ -24,7 +24,7 @@ public class Trip {
     Scanner _scanner = new Scanner(System.in);
 
     // Creating array for simulation
-    ReadFile fileRead = new ReadFile();
+    loadMockTrip fileRead = new loadMockTrip();
     IColour[] trackArray = new IColour[30];
     ReadConditions conRead = new ReadConditions();
     Train theTrain = new Train();

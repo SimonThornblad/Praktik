@@ -57,7 +57,6 @@ public class ReadConditions {
         for (String part : parts) {
             System.out.println(part);
         }
-
         int colour = whichColour(parts[1]); // Returns the ID for the colour
         int function = whichFunction(parts[2]); // Returns the ID for the function
 
