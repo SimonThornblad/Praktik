@@ -12,6 +12,7 @@ import mainPack.functions.IFunctions;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class Trip {
     //StartUp startUp = new StartUp();
@@ -25,15 +26,23 @@ public class Trip {
     ArrayList<Condition> conditionList = new ArrayList<>();
     Scanner _scanner = new Scanner(System.in);
 
-    public void init(){
+    // Creating array for simulation
+    ReadFile fileRead = new ReadFile();
+    Colour[] trackArray = fileRead.createArray();
 
+    public Trip() throws Exception {
+    }
+    //  ArrayList<Colour> colourArrayList2 = startUp.createColours();
+
+
+    public void init() throws InterruptedException {
+      //  autoTrip();
         functions = funFactory.availableFunctions();
         colours = colFactory.availableColors();
-
         conMenu();
     }
 
-    private void conMenu() {
+    private void conMenu() throws InterruptedException {
         Train theTrain = new Train();
 
         while (true) {
@@ -74,7 +83,8 @@ public class Trip {
             conditionList.add(newCondition);
         }
         // Initializes the trip
-        trip(theTrain);
+    //    trip(theTrain);
+        autoTrip(theTrain);
     }
 
 //==========  INPUT  ===============================================================================================
@@ -97,6 +107,34 @@ public class Trip {
         // Prints the colour list + colour counters
         printStuff(theTrain);
     }
+
+    public void autoTrip(Train theTrain) throws InterruptedException {
+
+        for(int i = 0; i < trackArray.length; i++) {
+
+            if(trackArray[i] != null) {
+                theTrain.colourList.add(trackArray[i]);
+                theTrain.addCount(trackArray[i]);
+
+                System.out.print("\nIndex [" + (i+1) + "]: " + trackArray[i] + "  ");
+                actions(theTrain, conditionList);
+                stringBuilder(theTrain);
+                System.out.println();
+
+
+
+            } else {
+                System.out.println("Index [" + (i+1)+ "]");
+
+            }
+
+            TimeUnit.MILLISECONDS.sleep(200L);
+        }
+        printStuff(theTrain);
+
+    }
+
+
 //======================================================================================================================
 
 
