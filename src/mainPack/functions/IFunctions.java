@@ -4,7 +4,7 @@ public interface IFunctions {
 
     public int getFunctionId();
 
-    public void executeFunction();
+    public String executeFunction();
 
     public String toString();
 }

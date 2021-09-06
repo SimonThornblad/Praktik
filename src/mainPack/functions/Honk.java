@@ -9,8 +9,18 @@ public class Honk implements IFunctions{
     }
 
     @Override
-    public void executeFunction() {
+    public String executeFunction() {
+        /*
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
+         */
+
+
+        return "tut tut";
     }
 
     public String toString() {

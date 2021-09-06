@@ -61,7 +61,7 @@ public class Trip {
 
             // Sets the event
             menus("event");
-            newCondition.setAction(new Event(funFactory.getFunction(inScan())));
+            newCondition.setAction(funFactory.getFunction(inScan()));
 
             // Sets the condition
             menus("condition");
@@ -143,7 +143,7 @@ public class Trip {
         for(Condition con : conList) {
             if(theTrain.lastColour().equals(con.colour)) {
                 if(con.conditionChecker()) {
-                    System.out.println("The train " + con.action.toString() + ".");
+                    System.out.println("The train " + con.action.executeFunction() + ".");
                 } else {
                     System.out.println("Condition exists but has not been met.");
                 }

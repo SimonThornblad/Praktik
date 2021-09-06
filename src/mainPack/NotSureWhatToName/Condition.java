@@ -5,7 +5,7 @@ import mainPack.functions.IFunctions;
 
 public class Condition {
     public IColour colour;
-    public Event action;
+    public IFunctions action;
     public Train theTrain;
     public int option;
     public int count;
@@ -67,11 +67,11 @@ public class Condition {
         this.colour = colour;
     }
 
-    public Event getAction() {
+    public IFunctions getAction() {
         return action;
     }
 
-    public void setAction(Event action) {
+    public void setAction(IFunctions action) {
         this.action = action;
     }
 
