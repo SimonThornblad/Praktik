@@ -10,6 +10,7 @@ public class FunctionFactory {
     public FunctionFactory(List<IFunctions> functions) {
         this.functions = functions;
         functions.add(new Honk());
+        functions.add(new ThreeSecStop());
 
     }
 

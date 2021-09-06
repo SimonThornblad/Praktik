@@ -10,14 +10,7 @@ public class Honk implements IFunctions{
 
     @Override
     public String executeFunction() {
-        /*
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
-         */
 
 
         return "tut tut";
