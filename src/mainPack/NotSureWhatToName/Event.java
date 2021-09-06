@@ -1,6 +1,7 @@
 package mainPack.NotSureWhatToName;
 
 import mainPack.functions.IFunctions;
+/*
 
 public class Event {
     public IFunctions whatHappens;
@@ -13,4 +14,5 @@ public class Event {
     public String toString() {
         return whatHappens.toString();
     }
-}
+ }
+ */

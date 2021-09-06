@@ -11,6 +11,7 @@ public class FunctionFactory {
         this.functions = functions;
         functions.add(new Honk());
         functions.add(new ThreeSecStop());
+        functions.add(new FlashLights());
 
     }
 

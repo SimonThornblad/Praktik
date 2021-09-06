@@ -2,7 +2,7 @@ package mainPack;
 
 import mainPack.NotSureWhatToName.Colour;
 import mainPack.NotSureWhatToName.Condition;
-import mainPack.NotSureWhatToName.Event;
+
 import mainPack.NotSureWhatToName.Train;
 import mainPack.colours.ColourFactory;
 import mainPack.colours.IColour;
