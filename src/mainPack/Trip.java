@@ -116,9 +116,8 @@ public class Trip {
             if(trackArray[i] != null) {
                 theTrain.colourList.add(trackArray[i]);
 
-                System.out.print("\nIndex [" + (i+1) + "]: " + trackArray[i] + "  ");
+                System.out.print("\nIndex [" + (i+1) + "]: " + trackArray[i] + "\n");
                 actions(theTrain, conditionList);
-                stringBuilder(theTrain);
                 System.out.println();
 
 

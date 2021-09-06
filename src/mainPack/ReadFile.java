@@ -1,6 +1,5 @@
 package mainPack;
 
-import mainPack.NotSureWhatToName.Colour;
 import mainPack.colours.IColour;
 
 import java.io.BufferedReader;
