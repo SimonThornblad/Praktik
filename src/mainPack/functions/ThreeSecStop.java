@@ -14,10 +14,14 @@ public class ThreeSecStop implements IFunctions{
 
         System.out.println("The train stops");
 
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        for(int i = 0; i < 3; i++) {
+            try {
+                Thread.sleep(1000);
+                System.out.println("Seconds: [" + (i+1) + "]");
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         return "The train starts again";
     }

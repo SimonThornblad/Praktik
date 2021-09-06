@@ -11,11 +11,14 @@ public class ReadFile {
 
     IColour[] trackArray = new IColour[30];
 
+    String fileName="mockTripColours.csv";
+
+
     public IColour[] createArray(List<IColour> myList) throws Exception {
         int i = 0;
-        File myFile = new File("mockTripData.csv");
+        File myFile = new File(fileName);
         myFile.createNewFile();
-        try (BufferedReader reader = new BufferedReader(new FileReader("mockTripData.csv"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
             StringBuilder stringBuilder = new StringBuilder();
             while ((line = reader.readLine()) != null) {
@@ -33,4 +36,5 @@ public class ReadFile {
         }
         return trackArray;
     }
+
 }

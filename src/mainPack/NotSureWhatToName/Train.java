@@ -4,12 +4,25 @@ import mainPack.NotSureWhatToName.Colour;
 import mainPack.colours.IColour;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Train {
 
     private int colourCount;
     public ArrayList<IColour> colourList = new ArrayList<>();
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Train train = (Train) o;
+        return colourCount == train.colourCount && Objects.equals(colourList, train.colourList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(colourCount, colourList);
+    }
 
 /*
     public void addCount (Colour colour) {

@@ -1,3 +1,2 @@
-﻿yellow;honks;occurrence;3
-blue;stops for 3 seconds then continues;sequential;0
-0;0;0;0
+﻿1;blue;honks;occurrence;1
+2;red;stops for 3 seconds then continues;occurrence;2

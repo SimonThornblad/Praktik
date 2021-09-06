@@ -15,9 +15,6 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class Trip {
-    //StartUp startUp = new StartUp();
-    //ArrayList<Colour> colourArrayList = startUp.createColours();
-    //ArrayList<Event> eventArrayList = startUp.createEvent();
     List<IFunctions> functions;
     List<IColour> colours;
     ColourFactory colFactory = new ColourFactory(new ArrayList<>());
@@ -29,8 +26,8 @@ public class Trip {
     // Creating array for simulation
     ReadFile fileRead = new ReadFile();
     IColour[] trackArray = new IColour[30];
-
-
+    ReadConditions conRead = new ReadConditions();
+    Train theTrain = new Train();
 
     public Trip() throws Exception {
     }
@@ -40,12 +37,13 @@ public class Trip {
         functions = funFactory.availableFunctions();
         colours = colFactory.availableColors();
         trackArray = fileRead.createArray(colours);
+        conditionList = conRead.createConditions(theTrain);
 
-        conMenu();
+        conMenu(theTrain);
+   //     autoTrip(theTrain);
     }
 
-    private void conMenu() throws InterruptedException {
-        Train theTrain = new Train();
+    private void conMenu(Train theTrain) throws InterruptedException {
 
         while (true) {
             Condition newCondition = new Condition(theTrain);
@@ -112,25 +110,16 @@ public class Trip {
     public void autoTrip(Train theTrain) throws InterruptedException {
 
         for(int i = 0; i < trackArray.length; i++) {
-
             if(trackArray[i] != null) {
                 theTrain.colourList.add(trackArray[i]);
-
-                System.out.print("\nIndex [" + (i+1) + "]: " + trackArray[i] + "\n");
+                System.out.print("Index [" + (i+1) + "]: " + trackArray[i]+ "\n");
                 actions(theTrain, conditionList);
-                System.out.println();
-
-
-
             } else {
                 System.out.println("Index [" + (i+1)+ "]");
-
             }
-
-            TimeUnit.MILLISECONDS.sleep(200L);
+            TimeUnit.MILLISECONDS.sleep(1000L);
         }
         printStuff(theTrain);
-
     }
 
 
@@ -143,12 +132,12 @@ public class Trip {
         for(Condition con : conList) {
             if(theTrain.lastColour().equals(con.colour)) {
                 if(con.conditionChecker()) {
-                    System.out.println("The train " + con.action.executeFunction() + ".");
+                    System.out.println("[ACTION] The train " + con.action.executeFunction() + ".");
                 } else {
                     System.out.println("Condition exists but has not been met.");
                 }
             } else {
-                System.out.println("No condition exists for this colour.");
+   //             System.out.println("No condition exists for this colour.");
             }
         }
     }
@@ -232,8 +221,8 @@ public class Trip {
 
 
     public void printConditions(ArrayList<Condition> conList) {
-        for(Condition condition : conList) {
-            System.out.println(condition.toString());
+        for(Condition con : conList) {
+            System.out.println(con.toString());
         }
     }
 
