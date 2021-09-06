@@ -6,6 +6,7 @@ import mainPack.NotSureWhatToName.Event;
 import java.util.ArrayList;
 
 public class StartUp {
+    /*
 
     public ArrayList<Colour> createColours() {
         ArrayList<Colour> colourList = new ArrayList<>();
@@ -36,5 +37,7 @@ public class StartUp {
         }
         return actionList;
     }
+
+     */
 
 }

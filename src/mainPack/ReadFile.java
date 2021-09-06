@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.util.ArrayList;
 
 public class ReadFile {
+    /*
 
     Colour[] trackArray = new Colour[30];
     StartUp startUp = new StartUp();
@@ -62,5 +63,7 @@ public class ReadFile {
         }
         return 10;
     }
+
+     */
 
 }

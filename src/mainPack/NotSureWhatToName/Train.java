@@ -1,18 +1,14 @@
 package mainPack.NotSureWhatToName;
 
 import mainPack.NotSureWhatToName.Colour;
+import mainPack.colours.IColour;
 
 import java.util.ArrayList;
 
 public class Train {
-    public int greenCount;
-    public int redCount;
-    public int blueCount;
-    public int yellowCount;
-    public ArrayList<Colour> colourList = new ArrayList<>();
 
-    public Train() {
-    }
+    private int colourCount;
+    public ArrayList<IColour> colourList = new ArrayList<>();
 
 
 
@@ -48,39 +44,23 @@ public class Train {
         return null;
     }
 
-    public int whichCounter(Colour colour) {
-        switch (colour.toString()) {
-            case "Green" -> {
-                return greenCount;
-            }
-            case "Red" -> {
-                return redCount;
-            }
-            case "Blue" -> {
-                return blueCount;
-            }
-            case "Yellow" -> {
-                return yellowCount;
+
+    public int getColorCount(int colourValue){
+        colourCount = 0;
+        for (IColour colour: colourList){
+            if (colour.returnId() == colourValue){
+                colourCount++;
             }
         }
-        return 100;
+        return colourCount;
     }
 
-    public Colour lastColour () {
+    public IColour lastColour () {
         return colourList.get(colourList.size()-1);
     }
 
-    public Colour getColour (int i) {
+    public IColour getColour (int i) {
         return colourList.get(colourList.size()-i);
     }
 }
-
-
-
-
-
-
-
-
-
 
