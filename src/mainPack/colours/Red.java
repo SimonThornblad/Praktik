@@ -5,11 +5,11 @@ public class Red implements IColour{
     int id = 2;
 
     @Override
-    public Integer returnId() {
+    public int returnId() {
         return id;
     }
 
-    public String toString(){
+    public String toString() {
         return "Red";
     }
 }

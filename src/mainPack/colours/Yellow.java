@@ -1,8 +1,8 @@
 package mainPack.colours;
 
-public class Blue implements IColour{
+public class Yellow implements IColour{
 
-    int id = 3;
+    int id = 4;
 
     @Override
     public int returnId() {
@@ -10,7 +10,6 @@ public class Blue implements IColour{
     }
 
     public String toString() {
-        return "Blue";
+        return "Yellow";
     }
 }
-

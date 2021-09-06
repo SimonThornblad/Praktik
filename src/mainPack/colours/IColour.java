@@ -4,5 +4,5 @@ public interface IColour {
 
     public String toString();
 
-    public Integer returnId();
+    public int returnId();
 }

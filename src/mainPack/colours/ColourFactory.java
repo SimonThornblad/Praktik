@@ -1,8 +1,5 @@
 package mainPack.colours;
 
-import mainPack.NotSureWhatToName.Colour;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class ColourFactory {
@@ -14,22 +11,11 @@ public class ColourFactory {
         colours.add(new Green());
         colours.add(new Red());
         colours.add(new Blue());
+        colours.add(new Yellow());
     }
 
     public IColour getColour(int i) {
         return colours.get(i - 1);
-        /*
-        switch (i){
-            case 1 ->{
-                return new Green();
-            }
-            case 2 -> {
-                return new Red();
-            }
-        }
-        return null;
-
-         */
     }
 
     public List<IColour> availableColors(){

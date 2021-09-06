@@ -1,6 +1,5 @@
 package mainPack.functions;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FunctionFactory {

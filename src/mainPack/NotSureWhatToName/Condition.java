@@ -1,10 +1,11 @@
 package mainPack.NotSureWhatToName;
 
+import mainPack.colours.IColour;
+import mainPack.functions.IFunctions;
+
 public class Condition {
-    public Colour colour;
+    public IColour colour;
     public Event action;
-    //public int occurrence = 1;
-    //public int sequential = 1;
     public Train theTrain;
     public int option;
     public int count;
@@ -17,7 +18,6 @@ public class Condition {
         return "Condition{" +
                 "colour=" + colour +
                 ", action=" + action +
-                ", theTrain=" + theTrain +
                 ", option=" + option +
                 ", count=" + count +
                 '}';
@@ -39,7 +39,7 @@ public class Condition {
 
     public boolean occurrenceChecker() {
         // Returns the value of the specific counter
-        int colourCounter = theTrain.whichCounter(colour);
+        int colourCounter = theTrain.getColorCount(colour.returnId());
 
         // Is the remainder 0?
         return colourCounter % count == 0;
@@ -51,8 +51,7 @@ public class Condition {
         int arraySize = theTrain.colourList.size();
 
         for (int i = count; i > 0; i-- ){
-            if (i > arraySize ||
-                    !theTrain.colourList.get(arraySize-1).toString().equals(theTrain.colourList.get(arraySize-i).toString())){
+            if (i > arraySize || !theTrain.colourList.get(arraySize -1).toString().equals(theTrain.colourList.get(arraySize - i).toString())) {
                 return false;
             }
         }
@@ -60,11 +59,11 @@ public class Condition {
     }
 
 
-    public Colour getColour() {
+    public IColour getColour() {
         return colour;
     }
 
-    public void setColour(Colour colour) {
+    public void setColour(IColour colour) {
         this.colour = colour;
     }
 

@@ -14,6 +14,6 @@ public class Honk implements IFunctions{
     }
 
     public String toString() {
-        return "the train honks";
+        return "honks";
     }
 }
