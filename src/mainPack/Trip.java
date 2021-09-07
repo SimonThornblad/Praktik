@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Trip implements Observer {
     //List<IFunctions> functions;
-    List<IColour> colours;
+    //List<IColour> colours;
     ColourFactory colFactory = new ColourFactory();
     FunctionFactory funFactory = new FunctionFactory();
     SensorData sensorData;
@@ -42,13 +42,15 @@ public class Trip implements Observer {
 
     public void init() throws Exception {
         //functions = funFactory.availableFunctions();
-        colours = colFactory.availableColors();
+        //colours = colFactory.availableColors();
         trackArray = fileRead.createArray();
         conditionList = conRead.createConditions(theTrain);
 
         Menu menu = new Menu(colFactory, funFactory, theTrain);
         menu.conMenu(conditionList);
-        RunMockTrip runMock = new RunMockTrip();
+
+
+        RunMockTrip runMock = new RunMockTrip(sensorData);
         runMock.autoTrip();
         //autoTrip(theTrain);
    //     autoTrip(theTrain);
@@ -78,7 +80,7 @@ public class Trip implements Observer {
     }
 
      */
-
+/*
     public void autoTrip(Train theTrain) throws InterruptedException {
 
         for(int i = 0; i < trackArray.length; i++) {
@@ -93,6 +95,8 @@ public class Trip implements Observer {
         }
         printStuff(theTrain);
     }
+
+ */
 
 
 //======================================================================================================================
@@ -160,17 +164,16 @@ public class Trip implements Observer {
 
     @Override
     public void update(int sensorInput) {
-        for (IColour colour : colours) {
+        validateColour(sensorInput);
+    }
+
+    public void validateColour(int sensorInput) {
+        for (IColour colour : ColourFactory.availableColors()) {
             if (colour.returnId() == sensorInput){
                 theTrain.colourList.add(colour);
-            }
-            else {
-                System.out.println("test");
+                actions(theTrain, conditionList);
             }
         }
 
-
     }
-
-
 }

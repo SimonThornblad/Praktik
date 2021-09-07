@@ -10,6 +10,7 @@ public class Train {
     private int colourCount;
     public ArrayList<IColour> colourList = new ArrayList<>();
 
+    /*
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -22,6 +23,8 @@ public class Train {
     public int hashCode() {
         return Objects.hash(colourCount, colourList);
     }
+
+     */
 
 /*
     public void addCount (Colour colour) {
