@@ -18,9 +18,9 @@ public class Menu {
     Train theTrain;
 
 
-    public Menu(ColourFactory colFactory, FunctionFactory funFactory, Train theTrain) {
-        this.colFactory = colFactory;
-        this.funFactory = funFactory;
+    public Menu( Train theTrain) {
+        this.colFactory = new ColourFactory();
+        this.funFactory = new FunctionFactory();
         this.theTrain = theTrain;
     }
 

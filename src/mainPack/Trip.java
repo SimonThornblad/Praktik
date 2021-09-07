@@ -21,16 +21,14 @@ import java.util.concurrent.TimeUnit;
 public class Trip implements Observer {
     //List<IFunctions> functions;
     //List<IColour> colours;
-    ColourFactory colFactory = new ColourFactory();
-    FunctionFactory funFactory = new FunctionFactory();
+    //ColourFactory colFactory = new ColourFactory();
+    //FunctionFactory funFactory = new FunctionFactory();
     SensorData sensorData;
-
     ArrayList<Condition> conditionList = new ArrayList<>();
 
 
     // Creating array for simulation
     LoadMockTrip fileRead = new LoadMockTrip();
-    IColour[] trackArray = new IColour[30];
     LoadConditions conRead = new LoadConditions();
     Train theTrain = new Train();
 
@@ -43,10 +41,10 @@ public class Trip implements Observer {
     public void init() throws Exception {
         //functions = funFactory.availableFunctions();
         //colours = colFactory.availableColors();
-        trackArray = fileRead.createArray();
+        fileRead.createArray();
         conditionList = conRead.createConditions(theTrain);
 
-        Menu menu = new Menu(colFactory, funFactory, theTrain);
+        Menu menu = new Menu(theTrain);
         menu.conMenu(conditionList);
 
 
@@ -174,6 +172,5 @@ public class Trip implements Observer {
                 actions(theTrain, conditionList);
             }
         }
-
     }
 }
