@@ -1,5 +1,6 @@
-package mainPack;
+package mainPack.Mocks;
 
+import mainPack.colours.ColourFactory;
 import mainPack.colours.IColour;
 
 import java.io.BufferedReader;
@@ -14,7 +15,7 @@ public class LoadMockTrip {
     String fileName="mockTripColours.csv";
 
 
-    public IColour[] createArray(List<IColour> myList) throws Exception {
+    public IColour[] createArray() throws Exception {
         int i = 0;
         File myFile = new File(fileName);
         myFile.createNewFile();
@@ -24,7 +25,7 @@ public class LoadMockTrip {
             while ((line = reader.readLine()) != null) {
                 stringBuilder.append(line);
                 if (!line.isEmpty()) {
-                        for (IColour colour : myList) {
+                        for (IColour colour : ColourFactory.availableColors()) {
                             if(colour.toString().equalsIgnoreCase(stringBuilder.toString())) {
                                 trackArray[i] = colour;
                             }

@@ -1,27 +1,32 @@
 package mainPack;
 
 
+import mainPack.Mocks.LoadConditions;
+import mainPack.Mocks.LoadMockTrip;
+import mainPack.Mocks.RunMockTrip;
 import mainPack.NotSureWhatToName.Condition;
 
 import mainPack.NotSureWhatToName.Train;
 import mainPack.colours.ColourFactory;
 import mainPack.colours.IColour;
+import mainPack.consoleMenus.Menu;
+import mainPack.controller.Observer;
+import mainPack.controller.SensorData;
 import mainPack.functions.FunctionFactory;
-import mainPack.functions.IFunctions;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
-public class Trip {
-    List<IFunctions> functions;
+public class Trip implements Observer {
+    //List<IFunctions> functions;
     List<IColour> colours;
-    ColourFactory colFactory = new ColourFactory(new ArrayList<>());
-    FunctionFactory funFactory = new FunctionFactory(new ArrayList<>());
+    ColourFactory colFactory = new ColourFactory();
+    FunctionFactory funFactory = new FunctionFactory();
+    SensorData sensorData;
 
     ArrayList<Condition> conditionList = new ArrayList<>();
-    Scanner _scanner = new Scanner(System.in);
+
 
     // Creating array for simulation
     LoadMockTrip fileRead = new LoadMockTrip();
@@ -29,64 +34,29 @@ public class Trip {
     LoadConditions conRead = new LoadConditions();
     Train theTrain = new Train();
 
-    public Trip() throws Exception {
+    public Trip(SensorData sensorData) throws Exception {
+        this.sensorData = sensorData;
+        sensorData.registerObserver(this);
     }
 
 
     public void init() throws Exception {
-        functions = funFactory.availableFunctions();
+        //functions = funFactory.availableFunctions();
         colours = colFactory.availableColors();
-        trackArray = fileRead.createArray(colours);
+        trackArray = fileRead.createArray();
         conditionList = conRead.createConditions(theTrain);
 
-        conMenu(theTrain);
+        Menu menu = new Menu(colFactory, funFactory, theTrain);
+        menu.conMenu(conditionList);
+        RunMockTrip runMock = new RunMockTrip();
+        runMock.autoTrip();
+        //autoTrip(theTrain);
    //     autoTrip(theTrain);
     }
 
-    private void conMenu(Train theTrain) throws InterruptedException {
-
-        while (true) {
-            Condition newCondition = new Condition(theTrain);
-            // Add a condition Y/N?
-            menus("newCon");
-            if(inScan() == 2) {
-                break;
-            }
-
-            // Sets the colour
-            menus("colour");
-            newCondition.setColour(colFactory.getColour(inScan()));
-
-            // Sets the event
-            menus("event");
-            newCondition.setAction(funFactory.getFunction(inScan()));
-
-            // Sets the condition
-            menus("condition");
-            newCondition.setOption(inScan());
-
-            switch (newCondition.getOption()) {
-                case 1 -> {
-                    // Sets the occurrence rate for the event
-                    System.out.println("How often should it occur?");
-                    // 1 = each time    2 = every second time ...
-                    newCondition.setCount(inScan());
-                }
-                case 2 -> {
-                    // Sets the sequential rate for the event
-                    System.out.println("How many in a row?");
-                    newCondition.setCount(inScan());
-                }
-                case 3 -> newCondition.setCount(0);
-            }
-            // Adds the condition to the list and loops back to the start
-            conditionList.add(newCondition);
-        }
-        // Initializes the trip
-        autoTrip(theTrain);
-    }
 
 //==========  INPUT  ===============================================================================================
+    /*
     public void trip(Train theTrain) {
 
         // This illustrates the actual input from the colour sensor
@@ -106,6 +76,8 @@ public class Trip {
         // Prints the colour list + colour counters
         printStuff(theTrain);
     }
+
+     */
 
     public void autoTrip(Train theTrain) throws InterruptedException {
 
@@ -144,50 +116,9 @@ public class Trip {
 
 
 //========== Printing methods for controlling ==========================================================================
-    public void menus(String menuChoice) {
-        switch (menuChoice) {
-            case "newCon" ->
-                    System.out.println("Do you wish to add any condition?" +
-                            "=============\n" +
-                            " 1. Yes\n" +
-                            " 2. No, initialize the trip\n" +
-                            "\n==>");
 
-            case "colour" -> {
-                System.out.println("Select a colour: ");
-                for (IColour colour : colours) {
-                    System.out.println(colour.returnId() + ". " + colour.toString());
-                }
-            }
-            case "event" -> {
-                System.out.println("What should happen when the train passes the colour?");
-                for (IFunctions action : functions) {
-                    System.out.println(action.getFunctionId() + ". The train " + action.toString() + ".");
-                }
-            }
-            case "condition" ->
-                System.out.println("Do you wish to add any condition?" +
-                        "=============\n" +
-                        " 1. Occurrence\n" +
-                        " 2. Sequential\n" +
-                        " 3. No\n" +
-                        "\n==>");
 
-            case "colourInput" -> {
-                System.out.println("\nWhich color do you pass?\n" +
-                        "=============\n");
-                for (IColour colour: colours){
-                    System.out.println("[" + colour.returnId() + ". " +
-                            colour.toString() + "] ");
-                }
-                System.out.println("[" + (colours.size()+1) + ". Exit]");
-            }
-        }
-    }
 
-    public int inScan() {
-        return Integer.parseInt(_scanner.nextLine().trim());
-    }
 
     public void printStuff (Train theTrain) {
         stringBuilder(theTrain);
@@ -226,4 +157,20 @@ public class Trip {
             System.out.println((i+1) +". " + conList.get(i).toString());
         }
     }
+
+    @Override
+    public void update(int sensorInput) {
+        for (IColour colour : colours) {
+            if (colour.returnId() == sensorInput){
+                theTrain.colourList.add(colour);
+            }
+            else {
+                System.out.println("test");
+            }
+        }
+
+
+    }
+
+
 }
