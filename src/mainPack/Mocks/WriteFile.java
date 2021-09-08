@@ -7,7 +7,7 @@ import java.io.OutputStreamWriter;
 
 public class WriteFile {
 
-
+/*
 
     public void writeAction(String action) throws FileNotFoundException {
 
@@ -19,4 +19,6 @@ public class WriteFile {
 
 
     }
+
+ */
 }

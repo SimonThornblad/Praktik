@@ -28,7 +28,7 @@ public class RunMockTrip {
         for(int i = 0; i < 2; i++) {
 
             readInput();
-            Thread.sleep(100);
+            Thread.sleep(350);
             i--;
         }
     }
@@ -38,7 +38,8 @@ public class RunMockTrip {
             StringBuilder stringBuilder = new StringBuilder();
             while ((line = reader.readLine()) != null) {
                 stringBuilder.append(line);
-                stringBuilder.append(";");
+                stringBuilder.append(",");
+              //  stringBuilder.append(del);
                 if (!line.isEmpty()) {
                     updateChecker(stringBuilder.toString());
                 }
@@ -49,7 +50,7 @@ public class RunMockTrip {
 
     public void updateChecker(String input) {
 
-        String[] parts = input.split(";");
+        String[] parts = input.split(",");
 
         //parts[0] = boolean, continue running?
         //parts[1] = colour
@@ -82,7 +83,7 @@ public class RunMockTrip {
                 return 4;
             }
             default -> {
-                System.out.println("Invalid colour input");
+                //System.out.println("Invalid colour input");
                 return 1000;
             }
         }
