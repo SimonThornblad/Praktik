@@ -4,6 +4,8 @@ import mainPack.NotSureWhatToName.Train;
 import mainPack.colours.IColour;
 import mainPack.controller.SensorData;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.concurrent.TimeUnit;
 
 public class RunMockTrip {
@@ -12,23 +14,76 @@ public class RunMockTrip {
     LoadMockTrip loadMockTrip;
     SensorData sensorData;
 
+    String fileName = "inputData.csv";
+    int lastUpdate = 0;
+
     public RunMockTrip(SensorData sensorData) throws Exception {
         this.loadMockTrip = new LoadMockTrip();
         this.sensorData = sensorData;
         this.trackArray = loadMockTrip.createArray();
     }
 
-    public void autoTrip() throws InterruptedException {
+    public void autoTrip() throws Exception {
 
-        for(int i = 0; i < trackArray.length; i++) {
+        for(int i = 0; i < 2; i++) {
 
-            if(trackArray[i] != null) {
-                System.out.print("Index [" + (i+1) + "]: " + trackArray[i]+ "\n");
-                sensorData.setInputData(trackArray[i].returnId());
-            } else {
-                System.out.println("Index [" + (i+1)+ "]");
+            readInput();
+            Thread.sleep(1000);
+            i--;
+        }
+    }
+    public void readInput() throws Exception {
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            StringBuilder stringBuilder = new StringBuilder();
+            while ((line = reader.readLine()) != null) {
+                stringBuilder.append(line);
+                stringBuilder.append(";");
+                if (!line.isEmpty()) {
+                    updateChecker(stringBuilder.toString());
+                }
             }
-            TimeUnit.MILLISECONDS.sleep(500L);
+            stringBuilder.delete(0, stringBuilder.length());
+        }
+    }
+
+
+    public void updateChecker(String input) {
+
+        String[] parts = input.split(";");
+
+        //parts[0] = boolean, continue running?
+        //parts[1] = colour
+        //parts[2] = update ID
+
+        if(Integer.parseInt(parts[2]) != lastUpdate) {
+            int colour = whichColour(parts[1]);
+            if(colour != 1000) {
+                sensorData.setInputData(colour);
+                lastUpdate = Integer.parseInt(parts[2]);
+                // call on action
+            }
+        }
+    }
+
+    public int whichColour(String input) {
+        switch (input) {
+            case "green" -> {
+                return 1;
+            }
+            case "red" -> {
+                return 2;
+            }
+            case "blue" -> {
+                return 3;
+            }
+            case "yellow" -> {
+                return 4;
+            }
+            default -> {
+                System.out.println("Invalid colour input");
+                return 1000;
+            }
         }
     }
 }
