@@ -28,7 +28,7 @@ public class RunMockTrip {
         for(int i = 0; i < 2; i++) {
 
             readInput();
-            Thread.sleep(1000);
+            Thread.sleep(100);
             i--;
         }
     }
