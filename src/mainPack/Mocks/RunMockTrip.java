@@ -56,6 +56,12 @@ public class RunMockTrip {
         //parts[1] = colour
         //parts[2] = update ID
 
+        boolean available = Boolean.parseBoolean(parts[0]);
+
+        if (available) {
+            System.out.println("Sant");
+        }
+
         if(Integer.parseInt(parts[2]) != lastUpdate) {
             int colour = whichColour(parts[1]);
             if(colour != 1000) {
