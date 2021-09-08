@@ -26,9 +26,8 @@ public class Trip implements Observer {
     SensorData sensorData;
     ArrayList<Condition> conditionList = new ArrayList<>();
 
-
     // Creating array for simulation
-    LoadMockTrip fileRead = new LoadMockTrip();
+    //LoadMockTrip fileRead = new LoadMockTrip();
     LoadConditions conRead = new LoadConditions();
     Train theTrain = new Train();
 
@@ -41,12 +40,11 @@ public class Trip implements Observer {
     public void init() throws Exception {
         //functions = funFactory.availableFunctions();
         //colours = colFactory.availableColors();
-        fileRead.createArray();
+        //fileRead.createArray();
         conditionList = conRead.createConditions(theTrain);
 
         Menu menu = new Menu(theTrain);
         menu.conMenu(conditionList);
-
 
         RunMockTrip runMock = new RunMockTrip(sensorData);
         runMock.autoTrip();

@@ -10,17 +10,17 @@ import java.util.concurrent.TimeUnit;
 
 public class RunMockTrip {
 
-    IColour[] trackArray;
-    LoadMockTrip loadMockTrip;
+    //IColour[] trackArray;
+    //LoadMockTrip loadMockTrip;
     SensorData sensorData;
 
     String fileName = "inputData.csv";
     int lastUpdate = 0;
 
     public RunMockTrip(SensorData sensorData) throws Exception {
-        this.loadMockTrip = new LoadMockTrip();
+        //this.loadMockTrip = new LoadMockTrip();
         this.sensorData = sensorData;
-        this.trackArray = loadMockTrip.createArray();
+        //this.trackArray = loadMockTrip.createArray();
     }
 
     public void autoTrip() throws Exception {
@@ -47,7 +47,6 @@ public class RunMockTrip {
         }
     }
 
-
     public void updateChecker(String input) {
 
         String[] parts = input.split(";");
@@ -64,7 +63,6 @@ public class RunMockTrip {
                 // call on action
                 sensorData.setInputData(colour);
                 lastUpdate = Integer.parseInt(parts[3]);
-
             }
         }
     }
