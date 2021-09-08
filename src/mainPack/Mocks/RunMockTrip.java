@@ -56,18 +56,15 @@ public class RunMockTrip {
         //parts[1] = colour
         //parts[2] = update ID
 
-        boolean available = Boolean.parseBoolean(parts[0]);
+        boolean available = Boolean.parseBoolean(parts[1]);
 
-        if (available) {
-            System.out.println("Sant");
-        }
-
-        if(Integer.parseInt(parts[2]) != lastUpdate) {
-            int colour = whichColour(parts[1]);
+        if(Integer.parseInt(parts[3]) != lastUpdate && available) {
+            int colour = whichColour(parts[2]);
             if(colour != 1000) {
-                sensorData.setInputData(colour);
-                lastUpdate = Integer.parseInt(parts[2]);
                 // call on action
+                sensorData.setInputData(colour);
+                lastUpdate = Integer.parseInt(parts[3]);
+
             }
         }
     }
