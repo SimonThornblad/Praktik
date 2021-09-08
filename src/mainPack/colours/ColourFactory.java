@@ -1,13 +1,15 @@
 package mainPack.colours;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ColourFactory {
 
-    private List<IColour> colours;
+    private static List<IColour> colours;
+    //private List<IColour> colours;
 
-    public ColourFactory(List<IColour> colours) {
-        this.colours = colours;
+    public ColourFactory() {
+        this.colours = new ArrayList<>();
         colours.add(new Green());
         colours.add(new Red());
         colours.add(new Blue());
@@ -18,7 +20,7 @@ public class ColourFactory {
         return colours.get(i - 1);
     }
 
-    public List<IColour> availableColors(){
+    public static List<IColour> availableColors(){
         return colours;
     }
 }

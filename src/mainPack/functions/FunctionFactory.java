@@ -1,5 +1,6 @@
 package mainPack.functions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FunctionFactory {
@@ -7,8 +8,8 @@ public class FunctionFactory {
     private static List<IFunctions> functions;
     //private List<IFunctions> functions;
 
-    public FunctionFactory(List<IFunctions> functions) {
-        this.functions = functions;
+    public FunctionFactory() {
+        this.functions = new ArrayList<>();
         functions.add(new Honk());
         functions.add(new ThreeSecStop());
         functions.add(new FlashLights());

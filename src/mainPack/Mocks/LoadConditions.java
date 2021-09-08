@@ -1,4 +1,4 @@
-package mainPack;
+package mainPack.Mocks;
 
 import mainPack.NotSureWhatToName.Condition;
 import mainPack.NotSureWhatToName.Train;
@@ -18,8 +18,8 @@ public class LoadConditions {
     List<IFunctions> functions;
     List<IColour> colours;
 
-    ColourFactory colFactory = new ColourFactory(new ArrayList<>());
-    FunctionFactory funFactory = new FunctionFactory(new ArrayList<>());
+    ColourFactory colFactory = new ColourFactory();
+    FunctionFactory funFactory = new FunctionFactory();
     Train myTrain;
 
     public ArrayList<Condition> createConditions(Train theTrain) throws IOException {
@@ -90,7 +90,6 @@ public class LoadConditions {
                     return 1000;
             }
         }
-
     }
     public int whichFunction(String input) {
         switch (input) {
