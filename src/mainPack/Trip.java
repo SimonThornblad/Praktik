@@ -57,6 +57,7 @@ public class Trip implements Observer {
     }
 
 
+
 //==========  INPUT  ===============================================================================================
     /*
     public void trip(Train theTrain) {
@@ -121,9 +122,6 @@ public class Trip implements Observer {
 
 //========== Printing methods for controlling ==========================================================================
 
-
-
-
     public void printStuff (Train theTrain) {
         stringBuilder(theTrain);
         printValues(theTrain);
@@ -153,8 +151,6 @@ public class Trip implements Observer {
          */
     }
 
-
-
     public void printConditions(ArrayList<Condition> conList) {
 
         for(int i = 0; i < conList.size(); i++) {
@@ -167,7 +163,6 @@ public class Trip implements Observer {
         if (TrainEngine.isMotorRunning()) {
             validateColour(sensorInput);
         }
-
     }
 
     public void validateColour(int sensorInput) throws IOException {
