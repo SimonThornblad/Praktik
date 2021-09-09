@@ -29,7 +29,8 @@ public class RunMockTrip {
             try {
                 readInput();
             } catch (Exception e) {
-                e.printStackTrace();
+                //e.printStackTrace();
+                System.out.println("Error");
             }
             Thread.sleep(350);
             i--;

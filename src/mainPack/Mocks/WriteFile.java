@@ -1,24 +1,20 @@
 package mainPack.Mocks;
 
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
+import java.io.*;
 
 public class WriteFile {
 
-/*
+    public static void writeAction(String action) throws IOException {
 
-    public void writeAction(String action) throws FileNotFoundException {
-
-        String fileName = "inputData.csv";
+        String fileName = "outputData.csv";
 
         FileOutputStream fileOutput = new FileOutputStream(fileName, false);
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fileOutput));
 
+        bw.write(action);
 
+        bw.flush();
+        bw.close();
 
     }
-
- */
 }
