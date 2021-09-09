@@ -69,6 +69,7 @@ public class RunMockTrip {
             if(colour != 1000) {
                 // call on action
                 sensorData.setInputData(colour);
+                //Updates the counter
                 lastUpdate = Integer.parseInt(parts[3]);
             }
         }
