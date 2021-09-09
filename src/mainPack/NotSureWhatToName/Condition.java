@@ -58,7 +58,7 @@ public class Condition {
         int arraySize = theTrain.colourList.size();
 
         for (int i = count; i > 0; i-- ){
-            if (i > arraySize || !theTrain.colourList.get(arraySize -1).toString().equals(theTrain.colourList.get(arraySize - i).toString())) {
+            if (arraySize == 1 || i > arraySize || !theTrain.colourList.get(arraySize -1).toString().equals(theTrain.colourList.get(arraySize - i).toString())) {
                 return false;
             }
         }
