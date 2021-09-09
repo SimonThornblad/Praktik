@@ -1,5 +1,9 @@
 package mainPack.functions;
 
+import mainPack.Mocks.WriteFile;
+
+import java.io.IOException;
+
 public class Honk implements IFunctions{
     int id = 1;
 
@@ -9,7 +13,9 @@ public class Honk implements IFunctions{
     }
 
     @Override
-    public String executeFunction() {
+    public String executeFunction() throws IOException {
+
+        WriteFile.writeAction("[ACTION] The train says tut tut");
         return "[ACTION] The train says tut tut";
     }
 

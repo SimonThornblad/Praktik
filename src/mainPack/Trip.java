@@ -12,8 +12,10 @@ import mainPack.colours.IColour;
 import mainPack.consoleMenus.Menu;
 import mainPack.controller.Observer;
 import mainPack.controller.SensorData;
+import mainPack.engineControll.TrainEngine;
 import mainPack.functions.FunctionFactory;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -32,6 +34,7 @@ public class Trip implements Observer {
     Train theTrain = new Train();
 
     public Trip(SensorData sensorData) throws Exception {
+
         this.sensorData = sensorData;
         sensorData.registerObserver(this);
     }
@@ -47,6 +50,7 @@ public class Trip implements Observer {
         menu.conMenu(conditionList);
 
         RunMockTrip runMock = new RunMockTrip(sensorData);
+        TrainEngine.startEngine();
         runMock.autoTrip();
         //autoTrip(theTrain);
    //     autoTrip(theTrain);
@@ -98,7 +102,7 @@ public class Trip implements Observer {
 //======================================================================================================================
 
 
-    private void actions(Train theTrain, ArrayList<Condition> conList) {
+    private void actions(Train theTrain, ArrayList<Condition> conList) throws IOException {
 
         // Finds the conditions with the same colour as the last one, then checks if the conditions are met
         for(Condition con : conList) {
@@ -159,11 +163,14 @@ public class Trip implements Observer {
     }
 
     @Override
-    public void update(int sensorInput) {
-        validateColour(sensorInput);
+    public void update(int sensorInput) throws IOException {
+        if (TrainEngine.isMotorRunning()) {
+            validateColour(sensorInput);
+        }
+
     }
 
-    public void validateColour(int sensorInput) {
+    public void validateColour(int sensorInput) throws IOException {
         for (IColour colour : ColourFactory.availableColors()) {
             if (colour.returnId() == sensorInput){
                 theTrain.colourList.add(colour);

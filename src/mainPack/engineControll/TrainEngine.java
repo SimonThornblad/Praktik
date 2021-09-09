@@ -1,5 +1,9 @@
 package mainPack.engineControll;
 
+import mainPack.Mocks.WriteFile;
+
+import java.io.IOException;
+
 public class TrainEngine {
 
     private static boolean motorRunning = false;
@@ -12,13 +16,15 @@ public class TrainEngine {
         TrainEngine.motorRunning = motorRunning;
     }
 
-    public static void stopEngine() {
+    public static void stopEngine() throws IOException {
         motorRunning = false;
+        WriteFile.writeAction("[ACTION] The train stops");
         System.out.println("[ACTION] The train stops");
     }
 
-    public static void startEngine() {
+    public static void startEngine() throws IOException {
         motorRunning = true;
-        System.out.println("[ACTION] The train starts again");
+        WriteFile.writeAction("[ACTION] The train starts");
+        System.out.println("[ACTION] The train starts");
     }
 }

@@ -1,6 +1,9 @@
 package mainPack.functions;
 
+import mainPack.Mocks.WriteFile;
 import mainPack.engineControll.TrainEngine;
+
+import java.io.IOException;
 
 public class ThreeSecStop implements IFunctions{
 
@@ -12,7 +15,7 @@ public class ThreeSecStop implements IFunctions{
     }
 
     @Override
-    public String executeFunction() {
+    public String executeFunction() throws IOException {
 
       TrainEngine.stopEngine();
 

@@ -6,6 +6,7 @@ import mainPack.controller.SensorData;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class RunMockTrip {
@@ -52,7 +53,7 @@ public class RunMockTrip {
         }
     }
 
-    public void updateChecker(String input) {
+    public void updateChecker(String input) throws IOException {
 
         String[] parts = input.split(",");
 
