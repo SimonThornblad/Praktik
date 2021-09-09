@@ -15,7 +15,6 @@ public class TrainEngine {
     public static void stopEngine() {
         motorRunning = false;
         System.out.println("[ACTION] The train stops");
-
     }
 
     public static void startEngine() {

@@ -26,8 +26,11 @@ public class RunMockTrip {
     public void autoTrip() throws Exception {
 
         for(int i = 0; i < 2; i++) {
-
-            readInput();
+            try {
+                readInput();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             Thread.sleep(350);
             i--;
         }
