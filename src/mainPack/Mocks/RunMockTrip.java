@@ -64,6 +64,7 @@ public class RunMockTrip {
         boolean available = Boolean.parseBoolean(parts[1]);
 
         if(Integer.parseInt(parts[3]) != lastUpdate && available) {
+            WriteFile.writeAction("");
             int colour = whichColour(parts[2]);
             if(colour != 1000) {
                 // call on action

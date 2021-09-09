@@ -119,7 +119,6 @@ public class Trip implements Observer {
         }
     }
 
-
 //========== Printing methods for controlling ==========================================================================
 
     public void printStuff (Train theTrain) {
