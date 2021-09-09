@@ -104,7 +104,7 @@ public class Trip implements Observer {
         for(Condition con : conList) {
             if(theTrain.lastColour().equals(con.colour)) {
                 if(con.conditionChecker()) {
-                    System.out.println("[ACTION] The train " + con.action.executeFunction() + ".");
+                    System.out.println(con.action.executeFunction());
                 } else {
       //              System.out.println("Condition exists but has not been met.");
                 }

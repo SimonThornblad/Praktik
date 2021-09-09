@@ -1,5 +1,7 @@
 package mainPack.functions;
 
+import mainPack.engineControll.TrainEngine;
+
 public class ThreeSecStop implements IFunctions{
 
     int id = 2;
@@ -12,7 +14,7 @@ public class ThreeSecStop implements IFunctions{
     @Override
     public String executeFunction() {
 
-        System.out.println("[ACTION] The train stops");
+      TrainEngine.stopEngine();
 
         for(int i = 0; i < 3; i++) {
             try {
@@ -23,7 +25,8 @@ public class ThreeSecStop implements IFunctions{
                 e.printStackTrace();
             }
         }
-        return "starts again.";
+        TrainEngine.startEngine();
+        return "";
     }
 
     public String toString(){
